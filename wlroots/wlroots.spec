@@ -1,4 +1,4 @@
-%global commit  0.11.0
+%global commit  0.12.0
 %global gitdate %{nil}
 %global gitrel  %{nil}
 %global gitver  %{nil}
@@ -8,7 +8,7 @@
 #global gitver  -#{gitdate}git#{scommit}
 
 
-%global api_ver 6
+%global api_ver 7
 
 
 Name:           wlroots
