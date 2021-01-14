@@ -1,5 +1,5 @@
 Name:           sway
-Version:        1.5
+Version:        1.5.1
 Release:        1%{?dist}
 Summary:        i3-compatible window manager for Wayland
 License:        MIT
