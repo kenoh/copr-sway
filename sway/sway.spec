@@ -1,10 +1,12 @@
 Name:           sway
 Version:        1.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        i3-compatible window manager for Wayland
 License:        MIT
 URL:            https://github.com/swaywm/sway
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+
+Patch0001:	d6ac30753ded44c5f1921a3bbccb5856d5ef6539.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++

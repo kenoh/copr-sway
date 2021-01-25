@@ -1,0 +1,47 @@
+From d6ac30753ded44c5f1921a3bbccb5856d5ef6539 Mon Sep 17 00:00:00 2001
+From: Ludvig Michaelsson <ludvig.michaelsson@gmail.com>
+Date: Sun, 20 Sep 2020 17:26:18 +0200
+Subject: [PATCH] swaybar: don't expand separator_block_width if separator is
+ false
+
+When swaybar receives the following JSON body
+
+    [
+        {
+            "full_text": "foo",
+            "separator": false,
+            "separator_block_width": 0
+        },
+        {
+            "full_text": "bar"
+        }
+    ]
+
+it should not draw any separator or any space between the two blocks.
+However, since swaybar calculates that separator_block_width
+0 is too small to fit any configured separator, it will override the
+separator_block_width with some non-zero value. This patch changes
+that such that the necessary separator_block_width is only expanded if
+the block has 'separator: true'.
+
+This should be in line to what i3 does, as its documentation of the
+i3bar protocol for separator states that "[...] if you disable the
+separator line, there will still be a gap after the block, unless you
+also use separator_block_width".
+---
+ swaybar/render.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/swaybar/render.c b/swaybar/render.c
+index 8f38174f5..8816abeff 100644
+--- a/swaybar/render.c
++++ b/swaybar/render.c
+@@ -208,7 +208,7 @@ static uint32_t render_status_block(cairo_t *cairo,
+ 					output->height < _ideal_surface_height) {
+ 				return _ideal_surface_height;
+ 			}
+-			if (sep_width > sep_block_width) {
++			if (block->separator && sep_width > sep_block_width) {
+ 				sep_block_width = sep_width + margin * 2;
+ 			}
+ 		}
