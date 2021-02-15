@@ -1,4 +1,4 @@
-%global ver 0.1.0
+%global ver 0.2.0
 %global gittag v%{ver}
 %global commit 61db8968f999a23fc7b604fcf7a82a83e7cf268e
 
