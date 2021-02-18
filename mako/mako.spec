@@ -1,6 +1,6 @@
 %global ver 1.4.1
 %global gittag v%{ver}
-%global commit eaab1e19777fbd8aa0714532723c87d84c14aa1a
+%global commit dbd9c2bc98ef0cec7801a049f4bf8d61f7be36d0
 
 %global shortcommit          %(c=%{commit}; echo ${c:0:7})
 %define build_timestamp      %(date +"%Y%m%d")
@@ -34,12 +34,13 @@ BuildRequires: pkgconfig(gdk-pixbuf-2.0)
 
 
 %build
-%meson
+%meson -Dsd-bus-provider=libsystemd
 %meson_build
 
 
 %install
 %meson_install
+#mv %{buildroot}/contrib/systemd/mako.service %{_userunitdir}/%{name}.service
 
 
 %files
@@ -50,7 +51,7 @@ BuildRequires: pkgconfig(gdk-pixbuf-2.0)
 %{_mandir}/man1/mako.1.gz
 %{_mandir}/man5/mako.5.gz
 %{_mandir}/man1/makoctl.1.gz
-%{_userunitdir}/%{name}.service
+#%{_userunitdir}/%{name}.service
 %{_datarootdir}/dbus-1/services/fr.emersion.mako.service
 
 
